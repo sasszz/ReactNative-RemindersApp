@@ -1,23 +1,35 @@
+import React from 'react'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { Calendar } from 'react-native-calendars';
+
 
 export default function App() {
+  const [text, onChangeText] = React.useState("");
+  const [dayum, setDay] = React.useState("");
+  const [number, onChangeNumber] = React.useState(null);
+
   return (
     <View style={styles.container}>
-      <Text>Hello World!</Text>
-      <Text>This is Lucie writing from her Laptop!</Text>
-      <Text>What's cool is that it's displaying on my phone!</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <Text>React Native is pretty cool</Text>
-      <StatusBar style="auto" />
+      <Text>Set a Reminder</Text>
+      <Text>Reminder Text:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={onChangeText}
+        value={text}
+      />
+      <Text>Set Date:</Text>
+      <Calendar 
+        disableArrowLeft={true}
+        minDate={new Date()}
+        initialDate={dayum}
+        onDayPress={day => {
+          console.log('selected day', day);
+          setDay(day)
+        }}
+      />
     </View>
+
   );
 }
 
@@ -28,4 +40,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  input: {
+    height: 40,
+    width: 160,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  }
 });
